@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5">
-    <h1>Employees</h1>
+    <h1>Employees List</h1>
     <div v-if="loading" class="text-center">
       <p>Loading employees...</p>
       <div class="spinner-border" role="status">

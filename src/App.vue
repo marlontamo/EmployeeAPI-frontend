@@ -1,10 +1,16 @@
 <template>
+  <div class="container">
+    <div class="row">
+    <HelloWorld msg="Welcome to My Vue.js App"/>
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
-    <router-link to="/employees">Employees</router-link>
+    <router-link to="/employees" class="btn btn-secondary text-white">List Employee</router-link> |
+    <router-link to="/create" class="btn btn-primary text-white">Register Employee</router-link> 
   </nav>
   <router-view/>
+  </div>
+    </div>
 </template>
 
 <style>
