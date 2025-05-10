@@ -46,7 +46,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router'; // Import useRouter
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 export default {
@@ -55,10 +55,9 @@ export default {
     const employees = ref([]);
     const loading = ref(true);
     const error = ref(null);
-    const router = useRouter(); // Initialize router
+    const router = useRouter();
 
     onMounted(() => {
-      // Use the provided API endpoint
       axios.get('https://localhost:7033/api/EmployeeAPI')
         .then(response => {
           employees.value = response.data;
@@ -71,8 +70,7 @@ export default {
     });
 
     const viewEmployee = (id) => {
-      // Use router.push to navigate to the view route.
-      router.push({ name: 'EmployeeDetails', params: { id: id } }); // Adjust 'employee-details' to your actual route name
+      router.push({ name: 'EmployeeDetails', params: { id: id } });
     };
 
     const editEmployee = (id) => {
@@ -80,17 +78,16 @@ export default {
     }
 
     const deleteEmployee = (id) => {
-      // In a real application, you'd show a confirmation dialog here.
       if (confirm(`Are you sure you want to delete employee with ID ${id}?`)) {
-        axios.delete(`https://localhost:7033/api/EmployeeAPI/${id}`) // Corrected delete URL.
+        axios.delete(`https://localhost:7033/api/EmployeeAPI/${id}`) 
           .then(() => {
-            // Remove the deleted employee from the list.
+            
             employees.value = employees.value.filter(employee => employee.id !== id);
-            alert('Employee deleted successfully!'); //optional
+            alert('Employee deleted successfully!'); 
           })
           .catch(err => {
             error.value = err.message;
-            alert('Failed to delete employee!'); //optional
+            alert('Failed to delete employee!'); 
           });
       }
     };
@@ -102,7 +99,7 @@ export default {
       viewEmployee,
       editEmployee,
       deleteEmployee,
-      router // Make sure to return the router instance if you need it in the template
+      router 
     };
   }
 };
@@ -111,5 +108,31 @@ export default {
 <style scoped>
 .container {
   max-width: 800px;
+}
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 0.25rem solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.spinner-border-primary {
+  color: #007bff;
 }
 </style>

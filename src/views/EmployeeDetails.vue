@@ -52,7 +52,7 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router'; // Import useRouter
+import { useRoute, useRouter } from 'vue-router'; 
 import axios from 'axios';
 
 export default {
@@ -62,7 +62,7 @@ export default {
     const loading = ref(true);
     const error = ref(null);
     const route = useRoute();
-    const router = useRouter(); // Use useRouter
+    const router = useRouter(); 
 
     const isEditing = ref(false);
     const editedEmployee = ref({});
@@ -74,7 +74,7 @@ export default {
         .then(response => {
           if (response.data) {
             employee.value = response.data;
-            editedEmployee.value = { ...response.data }; // Initialize for editing
+            editedEmployee.value = { ...response.data }; 
           } else {
             error.value = "Employee not found";
           }
@@ -92,7 +92,7 @@ export default {
 
     const cancelEditing = () => {
       isEditing.value = false;
-      editedEmployee.value = { ...employee.value }; // Reset to original data
+      editedEmployee.value = { ...employee.value }; 
     };
 
     const saveChanges = () => {
@@ -100,9 +100,9 @@ export default {
       axios
         .put(`https://localhost:7033/api/EmployeeAPI/${employeeId}`, editedEmployee.value)
         .then(() => {
-          employee.value = { ...editedEmployee.value }; // Update displayed data
+          employee.value = { ...editedEmployee.value }; 
           isEditing.value = false;
-          router.push(`/employees/${employeeId}`); //stay on the same page
+          router.push(`/employees/${employeeId}`); 
         })
         .catch(err => {
           error.value = err.message;
@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style scoped>
-/* Optional: You can add scoped styles here */
+
 .card {
   max-width: 400px;
   margin: 0 auto;
@@ -133,5 +133,31 @@ export default {
 
 .form-group {
   margin-bottom: 1rem;
+}
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 0.25rem solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.spinner-border-primary {
+  color: #007bff;
 }
 </style>

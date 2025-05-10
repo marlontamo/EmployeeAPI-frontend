@@ -54,7 +54,7 @@ export default {
         const response = await axios.post('https://localhost:7033/api/EmployeeAPI', employee.value);
         if (response.status === 201) {
           alert('Employee created successfully!');
-          router.push({ name: 'employee-list' });
+          router.push({ name: 'employees' });
         } else {
           error.value = `Failed to create employee. Status code: ${response.status}`;
           loading.value = false;
@@ -86,10 +86,36 @@ export default {
 .form-container {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px; /* Add some padding inside the form container */
-  border: 1px solid #ddd; /* Add a border */
-  border-radius: 8px; /* Add rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  background-color: white; /* Optional: Add a background color */
+  padding: 20px; 
+  border: 1px solid #ddd; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  background-color: white; 
+}
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 0.25rem solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.spinner-border-primary {
+  color: #007bff;
 }
 </style>
